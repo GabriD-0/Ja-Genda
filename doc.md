@@ -1,8 +1,38 @@
 ## Projeto: Mini Agendador (CRUD + regras simples)
 
-**Back-end (Java):** Spring Boot REST API
+**Back-end (Java):** Spring Boot REST API (Java 21)
 **Front-end (Vue):** Vue 3 + Vite + Axios + Vue Router
 **Banco:** SQLite
+
+---
+
+## Estado atual do projeto (atualizado)
+
+### Back-end — já feito
+* Projeto Spring Boot criado (`backend/`) com Maven.
+* **Spring Boot 4.0.2**, **Java 21**.
+* Dependências no `pom.xml`:
+  * `spring-boot-starter-webmvc`
+  * `spring-boot-starter-data-jpa`
+  * `spring-boot-starter-validation`
+  * Lombok
+  * **SQLite**: `sqlite-jdbc` + `hibernate-community-dialect`
+  * Testes: `spring-boot-starter-*-test` (data-jpa, validation, webmvc)
+* `application.properties` configurado para **SQLite**:
+  * `spring.datasource.url=jdbc:sqlite:agenda.db`
+  * `spring.jpa.hibernate.ddl-auto=update`
+  * `spring.jpa.show-sql=true`
+* Classe principal: `JaGendaApplication.java`.
+
+### Back-end — ainda não implementado
+* Entidades (`Customer`, `Appointment`).
+* Repositories, Services, Controllers.
+* DTOs, validação (Bean Validation), tratamento de erro global (ControllerAdvice).
+* Regra de conflito de horário (409).
+* CORS para o front.
+
+### Front-end
+* Ainda não criado.
 
 ### Funcionalidades mínimas
 
@@ -14,12 +44,11 @@
 
 ## Arquitetura
 O doc já indica uma arquitetura em camadas:
- - Controller → recebe HTTP, chama Service.
- - Service → regras de negócio, orquestra.
- - Repository → acesso a dados (JPA).
- - Domain → entidades (modelo).
+ - Controllers → recebe HTTP, chama Service.
+ - Services → regras de negócio, orquestra.
+ - Repositories → acesso a dados (JPA).
+ - Entities → entidades (modelo).
  - DTO → objetos de entrada/saída da API.
- - Exception → tratamento global de erros.
 
 ## 1 — Setup + base do Back-end (Java)
 
@@ -29,11 +58,11 @@ API rodando com 2 entidades e CRUD básico.
 
 ### Tarefas
 
-1. Criar projeto Spring Boot (dependências):
-   * Spring Web
+1. ~~Criar projeto Spring Boot (dependências)~~ ✅ feito:
+   * Spring Web (`spring-boot-starter-webmvc`)
    * Spring Data JPA
    * Validation
-   * H2 Database (pra ir rápido)
+   * **SQLite** (escolhido em vez de H2; `sqlite-jdbc` + `hibernate-community-dialect`)
 
 2. Modelar entidades:
    * `Customer { id, name, phone }`
@@ -183,6 +212,7 @@ Entregar como projeto apresentável (mesmo simples).
 ## Escopo extra (se sobrar tempo)
 
 * Filtro por cliente
+* ~~SQLite~~ ✅ já adotado como banco do projeto (ver item acima)
 * Paginação simples no backend
 * Autenticação fake (pin “1234” no front só pra treinar fluxo)
 * SQLite
