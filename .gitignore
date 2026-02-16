@@ -33,3 +33,4 @@ build/
 
 ### Backend ###
 **/agenda.db
+**/doc.md
